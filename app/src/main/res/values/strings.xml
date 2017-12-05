@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Mobile Serie Database</string>
+    <string name="search_a_show">Search a show</string>
+    <string name="search">Search</string>
+    <string name="serie_name">Serie Name</string>
+</resources>
