@@ -18,18 +18,23 @@ import java.net.URL;
  * Created by carolineboeykens on 25/12/2017.
  */
 
-public class APIFetchData extends AsyncTask<Void,Void,Void> {
+public class APIFetchData extends AsyncTask<String, String, String> {
 
     String data = "";
-    String dataParsed = "";
+    String result = "";
+
     String singleParsed = "";
+    String dataParsed = "";
+
+    //ArrayList<singleShow> shows;
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected String doInBackground(String... searchSerieString) {
 
         try {
             //api url
-            URL url = new URL("http://api.tvmaze.com/search/shows?q=game");
+            result = "http://api.tvmaze.com/search/shows?q=" + searchSerieString[0];
+            URL url = new URL(result);
 
             //connect to url
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -46,42 +51,38 @@ public class APIFetchData extends AsyncTask<Void,Void,Void> {
             }
 
             //DIT WERKT !!
-            /*JSONArray jsonArray = new JSONArray(data);
+            JSONArray jsonArray = new JSONArray(data);
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
-
                 singleParsed = "Show : " + jsonObject.get("show") + "\n";
-
                 dataParsed = dataParsed + singleParsed;
-            }*/
+            }
 
-            JSONArray jsonArray = new JSONArray(data);
+            //shows
+            //shows = new ArrayList<singleShow>();
+
+            //read data line by line
+            /*JSONArray jsonArray = new JSONArray(data);
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
 
                 JSONObject show = jsonObject.getJSONObject("show");
 
                 String name = (String) show.getString("name");
-
                 String summary = (String) show.getString("summary");
+                String premieredDate = (String) show.getString("premiered");
 
-                String premiered = (String) show.getString("premiered");
+                //customAdapter.shows.add(new singleShow("Name", "PremieredDate", "Summary"));
 
-                String status = (String) show.getString("status");
 
                 singleParsed = "Name : " + name + "\n" +
-                               "Premiered : " + premiered + "\n" +
-                               "Status : " + status + "\n" +
+                               "Premiered : " + premieredDate + "\n" +
                                "Summary : " + summary + "\n";
 
-
-
-                //String name = (String) jsonObject.getString("name");
-
-                //singleParsed = "Show : " + jsonObject.get("show") + "\n";
-
                 dataParsed = dataParsed + singleParsed;
-            }
+
+
+            }*/
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -96,10 +97,9 @@ public class APIFetchData extends AsyncTask<Void,Void,Void> {
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
 
-        MainActivity.outputText.setText(this.dataParsed);
-
+        MainActivity.outputText.setText(dataParsed);
     }
 }

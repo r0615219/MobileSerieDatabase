@@ -3,6 +3,7 @@
     <string name="search_a_show">Search a show</string>
     <string name="search">Search</string>
     <string name="serie_name">Serie Name</string>
-    <string name="test">Test</string>
-    <string name="output">output</string>
+    <string name="name">Name</string>
+    <string name="premiereddate">premieredDate</string>
+    <string name="summary">summary</string>
 </resources>
