@@ -23,15 +23,14 @@ public class APIFetchData extends AsyncTask<String, String, String> {
     String data = "";
     String result = "";
 
-    String singleParsed = "";
-    String dataParsed = "";
-
     //ArrayList<singleShow> shows;
 
     @Override
     protected String doInBackground(String... searchSerieString) {
 
         try {
+            customAdapter.shows.clear();
+
             //api url
             result = "http://api.tvmaze.com/search/shows?q=" + searchSerieString[0];
             URL url = new URL(result);
@@ -45,50 +44,14 @@ public class APIFetchData extends AsyncTask<String, String, String> {
 
             //get data and store it in variable
             String line = "";
-            while(line != null) {
+            while (line != null) {
                 line = bufferedReader.readLine();
                 data = data + line;
             }
 
-            //DIT WERKT !!
-            JSONArray jsonArray = new JSONArray(data);
-            for(int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
-                singleParsed = "Show : " + jsonObject.get("show") + "\n";
-                dataParsed = dataParsed + singleParsed;
-            }
-
-            //shows
-            //shows = new ArrayList<singleShow>();
-
-            //read data line by line
-            /*JSONArray jsonArray = new JSONArray(data);
-            for(int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
-
-                JSONObject show = jsonObject.getJSONObject("show");
-
-                String name = (String) show.getString("name");
-                String summary = (String) show.getString("summary");
-                String premieredDate = (String) show.getString("premiered");
-
-                //customAdapter.shows.add(new singleShow("Name", "PremieredDate", "Summary"));
-
-
-                singleParsed = "Name : " + name + "\n" +
-                               "Premiered : " + premieredDate + "\n" +
-                               "Summary : " + summary + "\n";
-
-                dataParsed = dataParsed + singleParsed;
-
-
-            }*/
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -100,6 +63,21 @@ public class APIFetchData extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        MainActivity.outputText.setText(dataParsed);
+        try {
+            //read data line by line
+            JSONArray jsonArray = new JSONArray(data);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
+
+                JSONObject show = jsonObject.getJSONObject("show");
+
+                String name = (String) show.getString("name");
+                String premieredDate = (String) show.getString("premiered");
+                customAdapter.shows.add(new singleShow(name, premieredDate));
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

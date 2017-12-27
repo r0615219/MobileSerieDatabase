@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
 
     public static TextView outputText;
@@ -28,13 +29,11 @@ public class MainActivity extends AppCompatActivity {
         final customAdapter customAdapter = new customAdapter(this);
         listviewShows.setAdapter(customAdapter);
 
-
+        //button clicked
         Button searchBtn = (Button) findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //output text
-                outputText = (TextView) findViewById(R.id.outputText);
 
                 //get text en set to string
                 EditText searchSerieEditText = (EditText) findViewById(R.id.searchSerieEditText);
@@ -53,27 +52,21 @@ public class MainActivity extends AppCompatActivity {
 class singleShow {
     String name;
     String premieredDate;
-    String summary;
 
-    singleShow(String Name, String PremieredDate, String Summary) {
+    singleShow(String Name, String PremieredDate) {
         this.name = Name;
         this.premieredDate = PremieredDate;
-        this.summary = Summary;
     }
 }
 
 class customAdapter extends BaseAdapter {
 
-    public static ArrayList<singleShow> shows;
+    public static ArrayList<singleShow> shows = new ArrayList<singleShow>();
     Context c;
 
     customAdapter(Context context){
         c = context;
         shows = new ArrayList<singleShow>();
-
-        shows.add(new singleShow("Game of Thrones", "25 maart 2007", "heel veel uitleg over deze serie, en nog meer blabla blablabla"));
-        shows.add(new singleShow("Stranger Things", "2 september 2016", "heel veel uitleg over deze serie, en nog meer blabla blablabla"));
-
     }
 
     @Override
@@ -98,19 +91,15 @@ class customAdapter extends BaseAdapter {
 
         LayoutInflater layoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //View v = layoutInflater.inflate(R.layout.single_show, parent, false);
-
         View v = layoutInflater.inflate(R.layout.single_show, null);
 
         TextView textShowName = (TextView) v.findViewById(R.id.textShowName);
         TextView textPremieredDate = (TextView) v.findViewById(R.id.textPremieredDate);
-        TextView textSummary = (TextView) v.findViewById(R.id.textSummary);
 
         singleShow tmp = shows.get(i);
 
         textShowName.setText(tmp.name);
         textPremieredDate.setText(tmp.premieredDate);
-        textSummary.setText(tmp.summary);
 
         return v;
     }

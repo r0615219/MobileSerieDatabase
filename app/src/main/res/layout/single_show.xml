@@ -29,13 +29,4 @@
         android:layout_toRightOf="@+id/textShowName"
         android:text="@string/premiereddate" />
 
-    <TextView
-        android:id="@+id/textSummary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textShowName"
-        android:layout_alignRight="@+id/textShowName"
-        android:layout_below="@+id/textShowName"
-        android:layout_marginTop="14dp"
-        android:text="@string/summary" />
 </RelativeLayout>
