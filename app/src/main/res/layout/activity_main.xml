@@ -46,19 +46,4 @@
         android:layout_alignStart="@+id/searchSerieEditText"
         android:layout_below="@+id/searchSerieEditText" />
 
-
-    <TextView
-        android:id="@+id/outputText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/search_a_show"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.098" />
-
 </RelativeLayout>
