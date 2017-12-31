@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         listviewShows = (ListView) findViewById(R.id.listviewShows);
         final customAdapter customAdapter = new customAdapter(this);
         listviewShows.setAdapter(customAdapter);
+        customAdapter.notifyDataSetChanged();
 
         listviewShows.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

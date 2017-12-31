@@ -15,12 +15,16 @@ import java.util.ArrayList;
 
 
 class singleShow {
+    int id;
     String name;
     String premieredDate;
+    String description;
 
-    singleShow(String Name, String PremieredDate) {
+    singleShow(int Id, String Name, String PremieredDate, String Description) {
+        this.id = Id;
         this.name = Name;
         this.premieredDate = PremieredDate;
+        this.description = Description;
     }
 }
 
@@ -36,13 +40,11 @@ class customAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        //return names.length;
         return shows.size();
     }
 
     @Override
     public Object getItem(int i) {
-        //return names[i];
         return shows.get(i);
     }
 

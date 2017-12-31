@@ -15,22 +15,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by carolineboeykens on 25/12/2017.
+ * Created by carolineboeykens on 31/12/2017.
  */
 
-public class APIFetchData extends AsyncTask<String, String, String> {
-
+public class APIFetchEpisodesById extends AsyncTask<Integer, Void, String> {
     String data = "";
     String result = "";
 
     @Override
-    protected String doInBackground(String... searchSerieString) {
+    protected String doInBackground(Integer... showId) {
 
         try {
-            customAdapter.shows.clear();
+            //episodesAdapter.episodes.clear();
 
             //api url
-            result = "http://api.tvmaze.com/search/shows?q=" + searchSerieString[0];
+            result = "http://api.tvmaze.com/shows/" + showId[0] + "/episodes";
             URL url = new URL(result);
 
             //connect to url
@@ -54,7 +53,7 @@ public class APIFetchData extends AsyncTask<String, String, String> {
         }
 
 
-        return data;
+        return null;
     }
 
     @Override
@@ -63,25 +62,22 @@ public class APIFetchData extends AsyncTask<String, String, String> {
 
         try {
             //read data line by line
-            JSONArray jsonArray = new JSONArray(result);
+            JSONArray jsonArray = new JSONArray(data);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
 
-                //get the show object
-                JSONObject show = jsonObject.getJSONObject("show");
+                //get the data inside the object
+                int episodeId = (int) jsonObject.getInt("id");
+                String singleEpisodeName = (String) jsonObject.getString("name");
 
-                //get the data inside the show object
-                int id = (int) show.getInt("id");
-                String name = (String) show.getString("name");
-                String premieredDate = (String) show.getString("premiered");
-                String description = (String) show.getString("summary");
-                
                 //add the data to the listview
-                customAdapter.shows.add(new singleShow(id, name, premieredDate, description));
+                //episodesAdapter.episodes.add(new singleEpisode(episodeId, singleEpisodeName));
+                //episodesAdapter.episodes.add(new singleEpisode(101, "Error Name"));
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 }

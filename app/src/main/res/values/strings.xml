@@ -5,4 +5,7 @@
     <string name="serie_name">Serie Name</string>
     <string name="name">Name</string>
     <string name="premiereddate">premieredDate</string>
+    <string name="show_description">Show Description</string>
+    <string name="episode_name">Episode Name</string>
+    <string name="test">Test</string>
 </resources>
