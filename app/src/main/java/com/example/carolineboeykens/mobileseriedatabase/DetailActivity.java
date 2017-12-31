@@ -37,16 +37,11 @@ public class DetailActivity extends AppCompatActivity {
         final anotherAdapter anotherAdapter = new anotherAdapter(this);
         listviewEpisodes.setAdapter(anotherAdapter);
         //episodesAdapter.notifyDataSetChanged();
-        anotherAdapter.episodes.add(new singleEpisode(412, "Episode test name"));
-
-        anotherAdapter.episodes.add(new singleEpisode(412, "Episode test name"));
-
-        anotherAdapter.episodes.add(new singleEpisode(412, "Episode test name"));
-
+        anotherAdapter.episodes.add(new singleEpisode(412, "Episode test name", 00, 00));
 
         //get episodesById - AsyncTask DoInBackground
-        //APIFetchEpisodesById getEpisodes = new APIFetchEpisodesById();
-        //getEpisodes.execute(showId);
+        APIFetchEpisodesById getEpisodes = new APIFetchEpisodesById();
+        getEpisodes.execute(showId);
 
 
     }

@@ -26,7 +26,7 @@ public class APIFetchEpisodesById extends AsyncTask<Integer, Void, String> {
     protected String doInBackground(Integer... showId) {
 
         try {
-            //episodesAdapter.episodes.clear();
+            anotherAdapter.episodes.clear();
 
             //api url
             result = "http://api.tvmaze.com/shows/" + showId[0] + "/episodes";
@@ -53,7 +53,7 @@ public class APIFetchEpisodesById extends AsyncTask<Integer, Void, String> {
         }
 
 
-        return null;
+        return data;
     }
 
     @Override
@@ -62,17 +62,18 @@ public class APIFetchEpisodesById extends AsyncTask<Integer, Void, String> {
 
         try {
             //read data line by line
-            JSONArray jsonArray = new JSONArray(data);
+            JSONArray jsonArray = new JSONArray(result);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
 
                 //get the data inside the object
                 int episodeId = (int) jsonObject.getInt("id");
                 String singleEpisodeName = (String) jsonObject.getString("name");
+                int singleEpisodeSeason = (int) jsonObject.getInt("season");
+                int singleEpisodeNumber = (int) jsonObject.getInt("number");
 
                 //add the data to the listview
-                //episodesAdapter.episodes.add(new singleEpisode(episodeId, singleEpisodeName));
-                //episodesAdapter.episodes.add(new singleEpisode(101, "Error Name"));
+                anotherAdapter.episodes.add(new singleEpisode(episodeId, singleEpisodeName, singleEpisodeSeason, singleEpisodeNumber));
 
             }
         } catch (JSONException e) {

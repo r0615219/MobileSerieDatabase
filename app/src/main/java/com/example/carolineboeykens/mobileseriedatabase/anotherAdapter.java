@@ -16,10 +16,14 @@ import java.util.ArrayList;
 class singleEpisode {
     int id;
     String name;
+    int season;
+    int number;
 
-    singleEpisode(int Id, String Name){
+    singleEpisode(int Id, String Name, int Season, int Number){
         this.id = Id;
         this.name = Name;
+        this.season = Season;
+        this.number = Number;
     }
 }
 
@@ -57,7 +61,7 @@ public class anotherAdapter extends BaseAdapter {
 
         TextView textEpisodeName = (TextView) v.findViewById(R.id.episodeNameTextView);
         singleEpisode episode = episodes.get(position);
-        textEpisodeName.setText(episode.name);
+        textEpisodeName.setText(episode.season + " x " + episode.number + " : " + episode.name);
 
         return v;
 
