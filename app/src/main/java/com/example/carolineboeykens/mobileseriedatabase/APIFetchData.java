@@ -75,7 +75,7 @@ public class APIFetchData extends AsyncTask<String, String, String> {
                 //get the data inside the show object
                 String name = (String) show.getString("name");
                 String premieredDate = (String) show.getString("premiered");
-
+                
                 //add the data to the listview
                 customAdapter.shows.add(new singleShow(name, premieredDate));
 
