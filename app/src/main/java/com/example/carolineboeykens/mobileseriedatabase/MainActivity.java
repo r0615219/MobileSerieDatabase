@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+
 public class MainActivity extends AppCompatActivity {
 
     ListView listviewShows;
@@ -18,10 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listviewShows = (ListView) findViewById(R.id.listviewShows);
+        listviewShows = (ListView) findViewById(R.id.listViewShows);
         final customAdapter customAdapter = new customAdapter(this);
         listviewShows.setAdapter(customAdapter);
         customAdapter.notifyDataSetChanged();
+
 
         listviewShows.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -33,21 +35,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //button clicked
-        Button searchBtn = (Button) findViewById(R.id.searchBtn);
+        Button searchBtn = findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //get text en set to string
-                EditText searchSerieEditText = (EditText) findViewById(R.id.searchSerieEditText);
-                String searchSerieString = (String) searchSerieEditText.getText().toString();
+                EditText searchSerieEditText = findViewById(R.id.searchSerieEditText);
+                String searchSerieString = searchSerieEditText.getText().toString();
 
                 //AsyncTask DoInBackground
                 APIFetchData getData = new APIFetchData();
                 getData.execute(searchSerieString);
-
             }
         });
 
     }
+
 }

@@ -53,17 +53,16 @@ public class APIFetchData extends AsyncTask<String, String, String> {
             e.printStackTrace();
         }
 
-
         return data;
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+    protected void onPostExecute(String data) {
+        super.onPostExecute(data);
 
         try {
             //read data line by line
-            JSONArray jsonArray = new JSONArray(result);
+            JSONArray jsonArray = new JSONArray(data);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.getJSONObject(i);
 
@@ -75,7 +74,7 @@ public class APIFetchData extends AsyncTask<String, String, String> {
                 String name = (String) show.getString("name");
                 String premieredDate = (String) show.getString("premiered");
                 String description = (String) show.getString("summary");
-                
+
                 //add the data to the listview
                 customAdapter.shows.add(new singleShow(id, name, premieredDate, description));
 
