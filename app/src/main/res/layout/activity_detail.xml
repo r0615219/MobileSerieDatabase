@@ -34,18 +34,4 @@
         android:layout_below="@+id/showNameTextView"
         android:layout_marginTop="25dp" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/episodeList"
-        android:layout_marginLeft="59dp"
-        android:layout_marginStart="59dp"
-        android:layout_toEndOf="@+id/showNameTextView"
-        android:layout_toRightOf="@+id/showNameTextView"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-
 </RelativeLayout>

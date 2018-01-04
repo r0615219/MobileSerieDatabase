@@ -1,5 +1,6 @@
 package com.example.carolineboeykens.mobileseriedatabase;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +14,13 @@ import java.util.ArrayList;
  * Created by carolineboeykens on 30/12/2017.
  */
 
-
-class singleShow {
+class SingleShow {
     int id;
     String name;
     String premieredDate;
     String description;
 
-    singleShow(int Id, String Name, String PremieredDate, String Description) {
+    SingleShow(int Id, String Name, String PremieredDate, String Description) {
         this.id = Id;
         this.name = Name;
         this.premieredDate = PremieredDate;
@@ -28,14 +28,14 @@ class singleShow {
     }
 }
 
-class customAdapter extends BaseAdapter {
+class CustomAdapter extends BaseAdapter {
 
-    public static ArrayList<singleShow> shows = new ArrayList<singleShow>();
+    static ArrayList<SingleShow> shows = new ArrayList<SingleShow>();
     Context c;
 
-    customAdapter(Context context){
+    CustomAdapter(Context context){
         c = context;
-        shows = new ArrayList<singleShow>();
+        shows = new ArrayList<SingleShow>();
     }
 
     @Override
@@ -58,12 +58,13 @@ class customAdapter extends BaseAdapter {
 
         LayoutInflater layoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        @SuppressLint("ViewHolder")
         View v = layoutInflater.inflate(R.layout.single_show, null);
 
         TextView textShowName = (TextView) v.findViewById(R.id.textShowName);
         TextView textPremieredDate = (TextView) v.findViewById(R.id.textPremieredDate);
 
-        singleShow tmp = shows.get(i);
+        SingleShow tmp = shows.get(i);
 
         textShowName.setText(tmp.name);
         textPremieredDate.setText(tmp.premieredDate);

@@ -1,5 +1,6 @@
 package com.example.carolineboeykens.mobileseriedatabase;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,13 @@ import java.util.ArrayList;
  * Created by carolineboeykens on 31/12/2017.
  */
 
-class singleEpisode {
+class SingleEpisode {
     int id;
     String name;
     int season;
     int number;
 
-    singleEpisode(int Id, String Name, int Season, int Number){
+    SingleEpisode(int Id, String Name, int Season, int Number){
         this.id = Id;
         this.name = Name;
         this.season = Season;
@@ -27,14 +28,14 @@ class singleEpisode {
     }
 }
 
-public class anotherAdapter extends BaseAdapter {
+class AnotherAdapter extends BaseAdapter {
 
-    public static ArrayList<singleEpisode> episodes = new ArrayList<singleEpisode>();
+    static ArrayList<SingleEpisode> episodes = new ArrayList<SingleEpisode>();
     Context context;
 
-    anotherAdapter(Context Context){
+    AnotherAdapter(Context Context){
         context = Context;
-        episodes = new ArrayList<singleEpisode>();
+        episodes = new ArrayList<SingleEpisode>();
     }
 
     @Override
@@ -52,15 +53,17 @@ public class anotherAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        @SuppressLint("ViewHolder")
         View v = layoutInflater.inflate(R.layout.single_episode, null);
 
         TextView textEpisodeName = (TextView) v.findViewById(R.id.episodeNameTextView);
-        singleEpisode episode = episodes.get(position);
+        SingleEpisode episode = episodes.get(position);
         textEpisodeName.setText(episode.season + " x " + episode.number + " : " + episode.name);
 
         return v;
