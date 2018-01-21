@@ -8,4 +8,9 @@
     <string name="show_description">Show Description</string>
     <string name="episode_name">Episode Name</string>
     <string name="test">Test</string>
+    <string name="facebook_app_id">113704679440086</string>
+    <string name="fb_login_protocol_scheme">fb113704679440086</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="title_activity_signup">Signup</string>
+    <string name="seen">seen</string>
 </resources>

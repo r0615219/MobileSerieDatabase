@@ -5,8 +5,22 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,11 +33,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class DetailActivity extends AppCompatActivity {
-
+    private DatabaseReference databaseReference;
+    FirebaseUser user;
     ListView listviewEpisodes;
     AnotherAdapter anotherAdapter;
+    Button addSerie;
 
     @SuppressLint("StaticFieldLeak")
     public class APIFetchEpisodesById extends AsyncTask<Integer, Void, String> {
@@ -115,6 +134,8 @@ public class DetailActivity extends AppCompatActivity {
         //output
         TextView showNameTextView = findViewById(R.id.showNameTextView);
         showNameTextView.setText(showName);
+        EditText favoriteId = findViewById(R.id.favoriteId);
+        favoriteId.setText(showName);
 
         //getshowId
         int showId = temporary.id;
@@ -123,7 +144,59 @@ public class DetailActivity extends AppCompatActivity {
         APIFetchEpisodesById getEpisodes = new APIFetchEpisodesById();
         getEpisodes.execute(showId);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        /*favoriteId = (EditText) findViewById(R.id.favoriteId);
+        final String input = favoriteId.getText().toString();
+        final DatabaseReference favoritesRef = databaseReference.child("favorites");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        String Id = UUID.randomUUID().toString();
+        final String userId = user.getUid();
+
+        Query myquery = favoritesRef.orderByChild("serieId").equalTo(input);
+        myquery.addListenerForSingleValueEvent (new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    addSerie = (Button) findViewById(R.id.addSerie);
+                    addSerie.setVisibility(View.GONE);
+                }else{
+                    addSerie = (Button) findViewById(R.id.addSerie);
+                    addSerie.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
 
     }
+    public void handleSaveData(View view) {
+
+        EditText favoriteId = (EditText) findViewById(R.id.favoriteId);
+        String input = favoriteId.getText().toString();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        DatabaseReference favoritesRef = ref.child("favorites");
+        DatabaseReference it = ref.child("favorites");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        String Id = UUID.randomUUID().toString();
+        String userId = user.getUid();
+
+        Map<String, SaveData> favorites = new HashMap<>();
+        favorites.put(input, new SaveData(Id, input, userId));
+
+        favoritesRef.push().setValue(favorites);
+
+        addSerie = (Button) findViewById(R.id.addSerie);
+        addSerie.setText("Remove from favorites");
+
+    }
+
 
 }

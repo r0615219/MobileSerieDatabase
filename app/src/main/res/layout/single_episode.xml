@@ -14,4 +14,18 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/episode_name" />
+
+    <Button
+        android:id="@+id/buttonEpisode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/episodeNameTextView"
+        android:layout_alignBottom="@+id/episodeNameTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:tag="tag"
+        android:onClick="handleSaveEpisode"
+        android:text="@string/seen" />
 </RelativeLayout>

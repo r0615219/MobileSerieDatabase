@@ -97,10 +97,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main);
+
+        //Intent Login = new Intent(this, LoginActivity.class);
+        //startActivity(Login);
 
         listviewShows = (ListView) findViewById(R.id.listViewShows);
         customAdapter = new CustomAdapter(this);
@@ -134,5 +138,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    // ...
+
+
+
 
 }
