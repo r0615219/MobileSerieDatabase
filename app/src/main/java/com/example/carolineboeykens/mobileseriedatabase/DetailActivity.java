@@ -43,6 +43,8 @@ public class DetailActivity extends AppCompatActivity {
     ListView listviewEpisodes;
     AnotherAdapter anotherAdapter;
     Button addSerie;
+    private String serieName;
+    private String serieId;
 
     @SuppressLint("StaticFieldLeak")
     public class APIFetchEpisodesById extends AsyncTask<Integer, Void, String> {
@@ -131,14 +133,16 @@ public class DetailActivity extends AppCompatActivity {
         SingleShow temporary = CustomAdapter.shows.get(index);
         String showName = temporary.name;
 
+        //getshowId
+        int showId = temporary.id;
+
         //output
         TextView showNameTextView = findViewById(R.id.showNameTextView);
         showNameTextView.setText(showName);
-        EditText favoriteId = findViewById(R.id.favoriteId);
-        favoriteId.setText(showName);
 
-        //getshowId
-        int showId = temporary.id;
+        //save showName and showId in variables to use in handleSaveData
+        serieName = showName;
+        serieId = Integer.toString(showId);
 
         //get episodesById - AsyncTask DoInBackground
         APIFetchEpisodesById getEpisodes = new APIFetchEpisodesById();
@@ -146,55 +150,22 @@ public class DetailActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        /*favoriteId = (EditText) findViewById(R.id.favoriteId);
-        final String input = favoriteId.getText().toString();
-        final DatabaseReference favoritesRef = databaseReference.child("favorites");
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        String Id = UUID.randomUUID().toString();
-        final String userId = user.getUid();
-
-        Query myquery = favoritesRef.orderByChild("serieId").equalTo(input);
-        myquery.addListenerForSingleValueEvent (new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    addSerie = (Button) findViewById(R.id.addSerie);
-                    addSerie.setVisibility(View.GONE);
-                }else{
-                    addSerie = (Button) findViewById(R.id.addSerie);
-                    addSerie.setVisibility(View.VISIBLE);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
     }
     public void handleSaveData(View view) {
 
-        EditText favoriteId = (EditText) findViewById(R.id.favoriteId);
-        String input = favoriteId.getText().toString();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
-        DatabaseReference favoritesRef = ref.child("favorites");
-        DatabaseReference it = ref.child("favorites");
+        DatabaseReference favoritesRef = databaseReference.child("favorites");
         user = FirebaseAuth.getInstance().getCurrentUser();
         String Id = UUID.randomUUID().toString();
         String userId = user.getUid();
 
         Map<String, SaveData> favorites = new HashMap<>();
-        favorites.put(input, new SaveData(Id, input, userId));
+        favorites.put(serieName, new SaveData(Id, serieId, userId));
 
         favoritesRef.push().setValue(favorites);
 
         addSerie = (Button) findViewById(R.id.addSerie);
         addSerie.setText("Remove from favorites");
+        addSerie.setOnClickListener(null);
 
     }
 

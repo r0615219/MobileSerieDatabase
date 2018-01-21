@@ -92,40 +92,13 @@ class AnotherAdapter extends BaseAdapter {
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 final String Id = UUID.randomUUID().toString();
                 final String userId = user.getUid();
-                int episodeId = episode.id;
-                //final String episodeIdString = Integer.toString(episodeId).trim();
 
                 Map<String, SaveEpisodes> episodes_seen = new HashMap<>();
                 episodes_seen.put(episode.season + " x " + episode.number + " : " + episode.name, new SaveEpisodes(Id, episode.id, userId));
 
                 ref.push().setValue(episodes_seen);
                 layout.setText("Unseen");
-
-
-                /*ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot data: dataSnapshot.getChildren()){
-                            if (data.child(episodeIdString).exists()) {
-                                layout.setText(episodeIdString);
-                                layout.refreshDrawableState();
-                            } else {
-
-                                Map<String, SaveEpisodes> episodes_seen = new HashMap<>();
-                                episodes_seen.put(episode.season + " x " + episode.number + " : " + episode.name, new SaveEpisodes(Id, episode.id, userId));
-
-                                ref.push().setValue(episodes_seen);
-                                layout.setText("Unseen");
-                                layout.refreshDrawableState();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });*/
+                layout.setOnClickListener(null);
 
             }
         });
