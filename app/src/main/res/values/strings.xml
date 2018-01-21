@@ -4,13 +4,13 @@
     <string name="search">Search</string>
     <string name="serie_name">Serie Name</string>
     <string name="name">Name</string>
-    <string name="premiereddate">premieredDate</string>
+    <string name="premiereddate">Premiered Date</string>
     <string name="show_description">Show Description</string>
     <string name="episode_name">Episode Name</string>
-    <string name="test">Test</string>
     <string name="facebook_app_id">113704679440086</string>
     <string name="fb_login_protocol_scheme">fb113704679440086</string>
     <string name="add_to_favorites">Add to favorites</string>
     <string name="title_activity_signup">Signup</string>
     <string name="seen">seen</string>
+    <string name="intro_text">Mobile Serie Database is an easy tool for tv-addicts to save shows and episodes. Never forget what episode you need to watch next. Connect with Facebook and find your favorite shows.</string>
 </resources>

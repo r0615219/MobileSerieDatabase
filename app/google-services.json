@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "474817845637-4cd2c6bpjjqe65v5suiuvco19rmvrakm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carolineboeykens.mobileseriedatabase",
+            "certificate_hash": "3e45f890c014466a30c7bb1fe7bf3459650c6db0"
+          }
+        },
+        {
           "client_id": "474817845637-7jm8uc06v9la93ugjsp5iafrlm3d9p60.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
